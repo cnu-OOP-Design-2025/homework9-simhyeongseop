@@ -6,7 +6,7 @@ using namespace std;
 
 template<typename T>
 class MyVector {
-    /* TODO */
+/* TODO */
 private:
     T* data;
     size_t capacity;
@@ -91,8 +91,8 @@ void testVector(const string& name, std::list<T> values) {
         vec.push_back(v);
 
     cout << name << ": ";
-    for (auto& e : vec)
-        cout << e << " ";
+    for (size_t i = 0; i < vec.size(); ++i)
+        cout << vec[i] << " ";
 
     cout << endl;
     while(vec.size())

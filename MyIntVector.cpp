@@ -1,6 +1,5 @@
 #include <iostream>
 #include <list>
-#include <stdexcept>
 using namespace std;
 
 class MyIntVector {
@@ -63,7 +62,7 @@ public:
     int pop_back() {
         if (length == 0)
             throw out_of_range("Vector is empty");
-        return data[--length];
+        return data[--length]; // 마지막 요소 제거
     }
 
     // 주어진 index의 요소를 반환하세요.
