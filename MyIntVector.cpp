@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <stdexcept>
 using namespace std;
 
 class MyIntVector {
@@ -10,10 +11,24 @@ private:
 
     void resize() {
         cout << "Resize: " << capacity << " -> " << capacity * 2 << endl;
-
         /* TODO */
         // capacity의 크기를 2배로 늘리고, 새로운 배열을 생성하세요.
         // 기존 데이터를 새로운 배열로 복사한 뒤, 기존 배열을 해제하세요.
+        
+        // capacity의 크기를 2배로 늘리고
+        size_t newCapacity = capacity * 2; 
+        // 새로운 배열을 생성하세요.
+        int* newData = new int[newCapacity]; 
+       
+        // 기존 데이터를 새로운 배열로 복사한 뒤,
+        for (size_t i = 0; i < length; ++i) {
+            newData[i] = data[i];
+        }
+        
+        // 기존 배열을 해제하세요.
+        delete[] data;
+        data = newData;
+        capacity = newCapacity;
     }
 
 public:
@@ -22,26 +37,33 @@ public:
     MyIntVector() : capacity(2), length(0) {
         /* TODO */
         // data는 capacity 크기의 배열을 동적 할당하세요.
+        data = new int[capacity];
     }
 
     ~MyIntVector() {
         /* TODO */
         // 동적 할당된 data를 해제하세요.
+        delete[] data;
     }
 
     void push_back(const int& value) {
         /* TODO */
         // length가 capacity에 도달하면 resize()를 호출하세요.
+        if (length == capacity){
+            resize();
+        }
 
         /* TODO */
         // 새로운 요소를 배열 끝에 추가하고 length를 증가시키세요.
+        data[length] = value;
+        length += 1;
     }
 
     // 마지막 항목을 리턴하세요.
     int pop_back() {
         if (length == 0)
             throw out_of_range("Vector is empty");
-        return data[--length]; // 마지막 요소 제거
+        return data[--length];
     }
 
     // 주어진 index의 요소를 반환하세요.
